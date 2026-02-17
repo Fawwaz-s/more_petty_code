@@ -1,4 +1,5 @@
 # more_petty_code
+#for document files
 jay = open('jacobo.txt','r') #r- is to read
 say = jay.read()
 print(say) #for opening a text file in python
