@@ -1,23 +1,21 @@
 # more_petty_code
-A repository of petty code from simple to complicated task
+jay = open('jacobo.txt','r') #r- is to read
+say = jay.read()
+print(say) #for opening a text file in python
+jay.close() #to close the file 
 
-random_side = random.randint(0,1)
-if random_side ==1:
-    print("Heads")
-else:
-    print("tails")
+with open('code.txt','w') as fine: #w -is to write
+   fine.write('Mucho Gracias Amigo,\n')
+   fine.write('Mucho Gracias Amiga,\n')#each new line as to start like this
+   fine.write('Mucho Gracia Amigo,\n')
+   fine.write('Much Gracias Amigo,\n')
+   fine.write('thanks.\n')
 
-##
-floats = random.random()
-print(floats)
+with open('code.txt','a') as fine: #a is to append ie add to w because each time w runs its overwrites previous script
+    fine.write('THIS was added,\n')
+    fine.write('Muy,\n')
+    fine.write('thanks.\n')
 
-flakes = random.randint(1,50)
-print(flakes)
-
-##Password Generator
-letters =['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n',
-          'O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z']
-numbers =['0','1','2','3','4','5','6','7','8','9']
-symbols =['@','.','!','$','%','(',')','*']
-print("Password Generator")
-let = int(print("How many letters do you want in your password? \n"))
+additional_lines =['First line is,\n','Second line added'] #THIS IS A BETTER WAY TO ADD THINGS WITHOUT MULTIPLE REENTRIES, IT USES []LISTS
+with open('code.txt','a') as fine:
+    fine.writelines(additional_lines)
