@@ -22,6 +22,8 @@ with open('code.txt','a') as fine:
     fine.writelines(additional_lines)
     
 FOR CSV FILES
+
+
 import csv
 with open('mycsv.csv','r') as excsv: #for csv files always remember to add the format of the file .csv
     csv_reader = csv.reader(excsv)
@@ -51,4 +53,58 @@ with open('mycsv.csv','r') as excsv:
         print(Name)
         print(age)
         # to print into sentence# print(f'my name is {Name};I'm {age}.')
+
+#to write csv file
+
+import csv
+
+data = [
+    ["name", "age", "city", "score", "active", "signup_date", "favorite_color", "notes"],
+    ["Emma", 24, "Oslo", 87.5, True, "2024-03-12", "teal", "prefers night shifts"],
+    ["Liam", 31, "Berlin", 64.0, False, "2023-11-30", "navy", ""],
+    ["Sofia", 19, "Lisbon", 92.3, True, "2025-01-08", "coral", "allergic to nuts"],
+    ["Noah", 45, "Tokyo", 41.8, True, "2022-05-19", "gray", "very punctual"],
+    ["Ava", 28, "Austin", 78.9, False, "2024-07-01", "purple", "left early last week"],
+    ["Lucas", 33, "Toronto", 55.2, True, "2023-09-14", "green", ""],
+    ["Mia", 22, "Sydney", 95.1, True, "2025-02-03", "pink", "loves coffee"],
+    ["Ethan", 39, "Madrid", 72.4, False, "2021-12-25", "orange", "needs new laptop"],
+    ["Isabella", 27, "Seoul", 88.7, True, "2024-10-17", "violet", ""],
+    ["James", 52, "Chicago", 19.5, False, "2020-04-02", "brown", "retiring soon"],
+    ["Olivia", 20, "Cape Town", 81.6, True, "2025-01-29", "mint", "very quiet"],
+    ["Benjamin", 36, "Barcelona", 66.9, True, "2023-06-11", "indigo", "plays guitar"],
+    ["Charlotte", 25, "Vancouver", 90.2, False, "2024-08-20", "lavender", ""],
+    ["Alexander", 41, "Dublin", 53.4, True, "2022-02-14", "red", "hates Mondays"]
+ ]  
+
+with open('practice_data.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    writer.writerows(data)
+
+print("CSV file created!")
+
+another way =>
+
+import csv
+
+with open('flint.csv','w',newline='') as stone: #newline='' removes extra spaces between the header and rest of the table
+    csv_writer = csv.writer(stone)
+    
+    csv_writer.writerow(["name", "age", "city", "score", "active", "signup_date", "favorite_color", "notes"]) # .writerow is for adding headers
+    csv_writer.writerow(["Alexander", 41, "Dublin", 53.4, True, "2022-02-14", "red", "hates Mondays"])
+
+     csv_writer.writerows([ ["Emma", 24, "Oslo", 87.5, True, "2024-03-12", "teal", "prefers night shifts"],
+    ["Liam", 31, "Berlin", 64.0, False, "2023-11-30", "navy", ""],
+    ["Sofia", 19, "Lisbon", 92.3, True, "2025-01-08", "coral", "allergic to nuts"],
+    ["Noah", 45, "Tokyo", 41.8, True, "2022-05-19", "gray", "very punctual"],
+    ["Ava", 28, "Austin", 78.9, False, "2024-07-01", "purple", "left early last week"],
+    ["Lucas", 33, "Toronto", 55.2, True, "2023-09-14", "green", ""],
+    ["Mia", 22, "Sydney", 95.1, True, "2025-02-03", "pink", "loves coffee"],
+    ["Ethan", 39, "Madrid", 72.4, False, "2021-12-25", "orange", "needs new laptop"],
+    ["Isabella", 27, "Seoul", 88.7, True, "2024-10-17", "violet", ""],
+    ["James", 52, "Chicago", 19.5, False, "2020-04-02", "brown", "retiring soon"],
+    ["Olivia", 20, "Cape Town", 81.6, True, "2025-01-29", "mint", "very quiet"],
+    ["Benjamin", 36, "Barcelona", 66.9, True, "2023-06-11", "indigo", "plays guitar"],
+    ["Charlotte", 25, "Vancouver", 90.2, False, "2024-08-20", "lavender", ""],
+    ["Alexander", 41, "Dublin", 53.4, True, "2022-02-14", "red", "hates Mondays"]]) #this is to add multiple rows at once, it uses .writerows instead of .writerow
+
    
