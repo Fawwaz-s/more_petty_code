@@ -107,4 +107,53 @@ with open('flint.csv','w',newline='') as stone: #newline='' removes extra spaces
     ["Charlotte", 25, "Vancouver", 90.2, False, "2024-08-20", "lavender", ""],
     ["Alexander", 41, "Dublin", 53.4, True, "2022-02-14", "red", "hates Mondays"]]) #this is to add multiple rows at once, it uses .writerows instead of .writerow
 
+To read a list of product codes (one per line) from a text file called product_sales.txt,
+looks up each product's name and price from a dictionary,
+creates sale-like records using today's date + an increasing sale number,
+and finally writes all these records into a CSV file called product_sales.csv.
+
+import csv
+import datetime
+
+product_data = {
+    "P001": ["Wireless Headphones", 100],
+    "P002": ["Laptop Backpack", 60],
+    "P003": ["Bluetooth Speaker", 50],
+    "P004": ["USB Flash Drive", 20],
+    "P005": ["Mobile Phone Case", 15],
+    "P006": ["Wireless Mouse", 30],
+    "P007": ["Laptop Stand", 40],
+    "P008": ["HDMI Cable", 15],
+    "P009": ["Smartphone", 600],
+    "P010": ["External Hard Drive", 100],
+}
+
+csv_data = [] #empty list that will collect all the rows to be written
+
+with open('product_sales.txt','r') as file:
+    product_ids = file.readlines() #opens and reads a text document into a list called product_ids
+
+sale_id = 1
+current_date = datetime.date.today() # for calling date to today
+
+for product_id in product_ids:
+    product_id = product_id.strip() #remove extra spaces
+    product_name = product_data[product_id][0]
+    product_price = product_data[product_id][1] #these are done to look up product id from product id to match product id in product data
+
+    row = [current_date, sale_id, product_id, product_name, product_price] #to create new headers
+
+    csv_data.append(row) #new headers are created into csv_data with .append
+
+    sale_id += 1 #each sales data is given an increment of one, so they are each unique 
+
+
+with open('product_sales.csv', 'w',newline='') as csv_file:
+    csv_writer = csv.writer(csv_file)  #to write a new csv 
+
+    csv_writer.writerow(['current_date','sale_id','product_id','product_name','product_price']) #the headers are written into it first
+
+    csv_writer.writerows(csv_data) #then the rest.
+
+
    
