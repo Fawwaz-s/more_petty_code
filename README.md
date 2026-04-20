@@ -1,4 +1,21 @@
 # more_petty_code
+---For going into a list of names, using it in a text file, and returning several letters from it into a new folder
+with open (r'C:\Users\33753\OneDrive\Documents\26Pro\basic100\Mail Merge Project Start\Input\Names\invited_names.txt') as file: #r'file path' for onefile
+    spanks = file.readlines()
+    print(spanks)
+    
+for namer in spanks:
+    with open(r'C:\Users\33753\OneDrive\Documents\26Pro\basic100\Mail Merge Project Start\Input\Letters\starting_letter.txt') as jummi:
+        letter = jummi.read()
+        wasi = letter.replace('[name]', namer.strip())
+        wasy = wasi.replace('Angela', 'Oridowo Oridola Olorioko BamBam, Oluaye marose')
+        
+        out = fr'C:\Users\33753\OneDrive\Documents\26Pro\basic100\Mail Merge Project Start\Output\k{(namer.strip())}.txt' #for folder 'fr or rf' for folders
+        with open(out, 'w') as outfile: #using 'with' has 'r' as default, for write or append, specify!!
+            outfile.write(wasy)
+
+
+
 #for document files
 jay = open('jacobo.txt','r') #r- is to read
 say = jay.read()
