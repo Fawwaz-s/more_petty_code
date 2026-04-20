@@ -10,7 +10,7 @@ for namer in spanks:
         wasi = letter.replace('[name]', namer.strip())
         wasy = wasi.replace('Angela', 'Oridowo Oridola Olorioko BamBam, Oluaye marose')
         
-        out = fr'C:\Users\33753\OneDrive\Documents\26Pro\basic100\Mail Merge Project Start\Output\k{(namer.strip())}.txt' #for folder 'fr or rf' for folders
+        out = fr'C:\Users\33753\OneDrive\Documents\26Pro\basic100\Mail Merge Project Start\Output\k{(namer.strip())}.txt' #for folder 'fr or rf' for folders.....for creating new files {(name of returns)} will be filled in by python.. 
         with open(out, 'w') as outfile: #using 'with' has 'r' as default, for write or append, specify!!
             outfile.write(wasy)
 
