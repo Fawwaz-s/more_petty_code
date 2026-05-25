@@ -1,0 +1,120 @@
+To upload data on google collab.
+for links - !wget https://link.com/blabla.csv after run !ls on another line.
+- run import pandas as pd
+- pd.read_csv('blabla.csv') #sep ='\t' this can be used to seperate the lines in your table if ugly
+print(space.to_string()) #to print an entire table
+
+from google.colab import files
+uploaded = files.upload() #to upload a file on the colab
+
+df.head()
+df.tail(2) #will print the last two
+
+space.loc[[104,106,109]] #works like a select command on sql 
+space.loc[:,["name","id"]] #to select specifically
+
+hr.loc[103,'Education Field']='Data Science' #to change values of something
+hr.sort_values(['Gender', 'Education Field'], ascending=False) #to sort ## or even ascending = [0,1] to sort the parameters differently 0 = false, 1= true
+
+###Filtering###
+hr.loc[hr['Performance Rating']<4, ['Gender','Job Role']] #to filter, gender and JR was just called to slim down the list
+
+hr[hr['Performance Rating']<4][['Gender', 'Job Role', 'Performance Rating']] #more simpler
+hr[(hr['Performance Rating'] < 4) & (hr['Gender'] == 'Female')][['Gender', 'Job Role', 'Performance Rating']] 
+#conditions should be in (), state it first before stating parameters.
+
+hr[hr['CF_attrition label'].str.contains("Ex")] #this filtered out Ex-employees, .str.contains("Ex"), case =False] case sens
+hr[hr['Education Field'].str.contains("Other|Life")] # | in this case means or
+
+hr[hr['Name'].str.contains(r'^A', regex=True)] #Matching Names Starting with 'A':
+spot[spot['Artist'].str.contains(r'^Bur', regex=True, na = False)] #starting with Bur, na = False because there are na values
+spot[~spot['Artist'].str.contains(r'^Bur', regex=True)] #to exclude entries starting with Bur
+df[df['Name'].str.contains(r'ner$', regex=True)] #Matching Names Ending with 'ner':
+df[df['Name'].str.contains(r'\d', regex=True)] #Matching Names Containing Digits
+hr[hr['Department'].str.contains(r'.&', regex=True)]#character search for &
+hr[hr['Department'].str.contains(r'(.)\1', regex=True)] #for repeated letters like Aaron or Emmett
+
+^ for matching the start of a string.
+$ for matching the end of a string.
+. for matching any character.
+\d for matching digits.
+\w for matching word characters.
+ #Run import numpy as np
+hr['name'] =4.99 #to create a new column
+hr['namely'] = np.where(hr['Gender']=='Female', 'Ele', 'Oja') #to pass a command, if ==female then Ele else Oja
+hr.drop(columns=['Name'], inplace=True) #to delete column
+
+fyre =hr.copy() #to copy a table for seperate use
+fyre['Jump Ship']= fyre['Total Working Years'] - fyre['Years At Company'] #new column with workings
+fyre.rename(columns={'namely':'Name'}, inplace=True) #to rename a column
+
+spat.query('Artist == "Asake"' ) #to query
+
+spot['Release Date'] = pd.to_datetime(spot['Release Date'], format = "%y-%m-%d") #First run this in a seperate snippet
+
+spot['Release Date'] = spot['Release Date'].dt.month #run the two lines together, dt.month or dt.year
+spot[['Artist','Track', 'Release Date']] #to query a month and other variables
+
+spot.to_csv('spot.csv', index=False) #to save a table
+spot['Spotify Streams'] = pd.to_numeric(spot['Spotify Streams']) #to convert the column to numeric.
+spot['Spotify Streams'] = spot['Spotify Streams'].str.replace(',', '').astype(float) #--> This was to remove the ',' in a number cell to allow numeric calculation.
+spot['Track Category']= spot['Spotify Streams'].apply(lambda x: 'Gold' if x < 500000000 else ('Platinum' if x <1000000000 else'Diamond')) #to pass an if statement 
+
+def nation(row): #because we want it on row
+  if row['Spotify Streams'] < 500000000 and row['Spotify Playlist Reach']>1:
+    return 'Goldy'
+  elif row['Spotify Streams'] < 1000000000 and row['Spotify Playlist Reach']>1:
+    return 'Platini'
+  else:
+    return 'Ice'
+spot['Flowers'] = spot.apply(nation, axis=1) #flowers is row title, axis = 1 means row, axis = 0 means column
+
+def pays(row):
+    if row['Country'] == 'USA':
+        return 'American'
+    elif row['Country'] == 'UK':
+        return 'British'
+    else:
+        return 'Other'
+
+# Apply the function to the dataframe
+spot['Country Music'] = spot.apply(pays, axis=1)
+
+for querying exclusions
+df[df['name'] != df['oruko']] #this will return the entire table
+df[df['name'] != df['oruko']][['age', 'oruko','name']]#this will return the specific columns
+ngr = pic[pic['Team']=='Nigeria'].copy() #filters just the nigerian data
+
+ngr = pic[pic['Team']=='Nigeria'].copy()
+fr = pic[pic['Team']=='France'].copy()
+gbr = pic[pic['Team']=='Great Britain'].copy()
+
+spot.fillna(0) #will fill NA values with 0 or whatever you put
+df.fillna(df['sales'].mean()) #this will fill na values with mean
+df['sales'] = df.fillna(df['sales'].interpolate()) #it will use AI to fill the na based on other cells
+df.dropna() #will drop everyrow with N/A
+df.dropna(subset=['sales'], inplace=True) #to drop specific an
+spit[spit.isna().any(axis=1)] #will show where there are null values
+
+movies['Genre'].value_counts() #for querying value counts
+movies[movies['Cast']=='Brad Pitt']['Genre'].value_counts() #will find brad pitt and then search his genre
+film.groupby('Genre')['Budget'].mean() #groups genre by budget and applies average, also possible .sum
+film.groupby('Genre').agg({'Budget':'mean', 'Revenue':'mean'}) #multiple calc.
+sales.groupby('Product', 'days').agg({'Budget':'mean','Revenue':'mean'}) ###
+
+def fill_avo(row): #else and if
+    if pd.notna(row['Improved Access to Digital Finance']):
+        return row['Improved Access to Digital Finance']
+    elif pd.notna(row['Improved Governance and Institutional Capacity']):
+        return row['Improved Governance and Institutional Capacity']
+    elif pd.notna(row['Improved Effectiveness and Efficiency']):
+        return row['Improved Effectiveness and Efficiency']
+    elif pd.notna(row['Productivity Increased']):
+        return row['Productivity Increased']
+    elif pd.notna(row['Business Growth']):
+        return row['Business Growth']
+    else:
+        return 1
+
+# Apply the function to each row
+dat['avo'] = dat.apply(fill_avo, axis=1) 
